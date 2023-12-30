@@ -58,10 +58,6 @@ jobs:
           path: 'packages/uikit/coverage/lcov.info'
           min_coverage: 85
   deploy:
-    needs:
-      - lint
-      - build
-      - unit_test
     permissions:
       pages: write
       id-token: write
