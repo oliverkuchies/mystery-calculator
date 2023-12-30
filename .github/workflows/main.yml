@@ -1,34 +1,37 @@
 name: CI
 
 on:
-    pull_request:
-        types:
-            - opened
-            - reopened
-            - synchronize
-            - labeled
-    push:
-        branches:
-            - master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
+  push:
+    branches:
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    uses: actions/checkout@v2
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Build
         run: npm run build
 
   lint:
-    needs: [build]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Lint
         run: npm run lint
 
   test:
-    needs: [build]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Test
         run: npm run test
