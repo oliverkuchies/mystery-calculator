@@ -14,10 +14,8 @@ jobs:
             persist-credentials: false
       -   name: Install and Build 🔧
           run: |
-            cd packages/uikit
-            npm run build-storybook
-            cd ../../packages/shopify-add-to-cart
-            npm run build-storybook
+            npm ci
+            npm run build
       -   name: Archive artifact
           shell: sh
           run: |
@@ -32,6 +30,8 @@ jobs:
               --exclude=.git \
               --exclude=.github \
               .
+          env:
+            INPUT_PATH: docs
       -   name: Upload artifact
           uses: actions/upload-artifact@v3
           with:
@@ -39,6 +39,24 @@ jobs:
             path: ${{ runner.temp }}/artifact.tar
             retention-days: 1
             if-no-files-found: error
+  unit_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: Stackla/stackla-github-actions/pnpm@master
+      - name: Test Unit
+        run: npx turbo run test --filter='./packages/*'
+      - name: Coverage Test
+        uses: VeryGoodOpenSource/very_good_coverage@v2
+        with:
+          path: 'packages/analytics-tracking/coverage/lcov.info'
+          min_coverage: 90
+      - name: Coverage Test
+        uses: VeryGoodOpenSource/very_good_coverage@v2
+        with:
+          path: 'packages/uikit/coverage/lcov.info'
+          min_coverage: 85
   deploy:
     needs:
       - lint
