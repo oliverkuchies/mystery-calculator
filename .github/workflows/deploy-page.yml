@@ -1,0 +1,57 @@
+name: Mystery Calculator Deploy Page
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -   name: Checkout 🛎️
+          uses: actions/checkout@v4
+          with:
+            persist-credentials: false
+      -   name: Install and Build 🔧
+          run: |
+            cd packages/uikit
+            npm run build-storybook
+            cd ../../packages/shopify-add-to-cart
+            npm run build-storybook
+      -   name: Archive artifact
+          shell: sh
+          run: |
+            chmod -c -R +rX "public" |
+            while read line; do
+               echo "::warning title=Invalid file permissions automatically fixed::$line"
+            done
+            tar \
+              --dereference --hard-dereference \
+              --directory "public" \
+              -cvf "$RUNNER_TEMP/artifact.tar" \
+              --exclude=.git \
+              --exclude=.github \
+              .
+      -   name: Upload artifact
+          uses: actions/upload-artifact@v3
+          with:
+            name: github-pages
+            path: ${{ runner.temp }}/artifact.tar
+            retention-days: 1
+            if-no-files-found: error
+  deploy:
+    needs:
+      - lint
+      - build
+      - unit_test
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      -   name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v2

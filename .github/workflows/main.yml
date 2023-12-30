@@ -1,0 +1,34 @@
+name: CI
+
+on:
+    pull_request:
+        types:
+            - opened
+            - reopened
+            - synchronize
+            - labeled
+    push:
+        branches:
+            - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    uses: actions/checkout@v2
+    steps:
+      - name: Build
+        run: npm run build
+
+  lint:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint
+        run: npm run lint
+
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: npm run test
