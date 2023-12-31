@@ -19,7 +19,7 @@ export class App extends LitElement {
         justify-content: center;
         gap: 10px;
         width: 100%;
-        height: 100%;
+        overflow: auto;
       }
       
       footer {
@@ -43,6 +43,9 @@ export class App extends LitElement {
   }
 
   private getCurrentPage (): TemplateResult {
+    // Run resize
+    window.dispatchEvent(new Event('resize'))
+
     switch (this.currentPage) {
       case 'calculator':
         return html`<app-calculator

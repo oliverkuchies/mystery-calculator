@@ -10,5 +10,7 @@
   },
   "rules": {},
   "ignorePatterns": [
+    "*.config.ts",
+    "*.d.ts"
   ]
 }

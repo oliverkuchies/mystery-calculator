@@ -20,6 +20,7 @@ export class Card extends LitElement {
         flex-wrap: wrap;
         padding: 5px;
         justify-content: space-between;
+        box-sizing: border-box;
 
         &.selected {
           background-color: var(--bg-hover);

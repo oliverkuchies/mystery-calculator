@@ -16,14 +16,7 @@ export class Result extends LitElement {
         gap: 10px;
         width: 100%;
         height: 100%;
-      }
-
-      h1 {
-        font-size: 2rem;
-        font-weight: bold;
-        text-align: center;
-      }
-    `
+      }`
   ]
 
   override render (): TemplateResult {
