@@ -14,7 +14,7 @@ export class Number extends LitElement {
         align-items: center;
         border: 1px solid white;
         border-radius: 50%;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: bold;
         min-width: 40px;
         min-height: 40px;

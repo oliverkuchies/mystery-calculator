@@ -16,17 +16,6 @@ export class Welcome extends LitElement {
         width: 100%;
         height: 100%;
       }
-
-      h1 {
-        font-size: 2rem;
-        font-weight: bold;
-        text-align: center;
-      }
-
-      p {
-        font-size: 1.5rem;
-        text-align: center;
-      }
     `
   ]
 

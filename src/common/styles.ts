@@ -48,8 +48,20 @@ const globalStyles = css`
     border-radius: 5px;
   }
 
-  p {
+  h1 {
     font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 1.0rem;
+    text-align: center;
   }
 `
 
