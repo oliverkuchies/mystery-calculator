@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "node build.mjs",
-    "lint": "eslint --ext .ts,.tsx .",
+    "lint": "tsc && eslint --ext .ts,.tsx .",
     "test": "jest",
     "format": "prettier --write ."
   }

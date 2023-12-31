@@ -28,6 +28,6 @@
       }
     ]
   },
-  "include": ["**/*.ts"],
-  "exclude": [""]
+  "include": ["src/**/*.ts"],
+  "exclude": []
 }
