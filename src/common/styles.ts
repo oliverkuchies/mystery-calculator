@@ -28,11 +28,8 @@ const globalStyles = css`
   }
 
   .page-wrapper {
-    position: absolute;
-    top: 5vh;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    position: relative;
+    margin-top: 5vh;
     border-radius: 5px;
     color: white;
     z-index: 2;
